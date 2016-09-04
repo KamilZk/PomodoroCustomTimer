@@ -1,17 +1,23 @@
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JOptionPane;
+
 //wersja modyfikowana
 
 public class Stopwatch
 {
 	private static int	pozostalyCzas;
-	private static String sekundy;
 	
 	private static Timer	timer;
 	
 	private static int opoznienie = 1000;
 	private static int czasWms = 1000;
+	
+	private static int getTimerGodziny;
+	private static int getTimerMinuty;
+	private static int getTimerSekundy;
+	
 	
 	
 /*	public Stopwatch()
@@ -38,20 +44,69 @@ public class Stopwatch
 		{}
 	}
 	
-	public static void pobierzCzas()
+	private static void pobierzCzas() 
 	{
 		
+	    /*try 
+	    {
+	    	getTimerGodziny=Integer.parseInt(PomodoroCustomTimer.txtGodziny.getText());
+	    } 
+	    catch (NumberFormatException nfe)
+	    {
+	    	getTimerGodziny=11;
+	        System.out.println("godz");
+	    }
 		
-		int getTimerGodziny = Integer.parseInt(PomodoroCustomTimer.txtGodziny.getText());
-		int getTimerMinuty = Integer.parseInt(PomodoroCustomTimer.txtMinuty.getText());
-		int getTimerSekundy = Integer.parseInt(PomodoroCustomTimer.txtSekundy.getText());
+	    try 
+	    {
+	    	getTimerMinuty=Integer.parseInt(PomodoroCustomTimer.txtGodziny.getText());
+	    } 
+	    catch (NumberFormatException nfe)
+	    {
+	    	getTimerMinuty=22;
+	    	System.out.println("min");
+	    }*/
+	    
+/*	    try 
+	    {
+	    	getTimerSekundy = Integer.parseInt(PomodoroCustomTimer.txtGodziny.getText());
+	    } 
+	    catch (NumberFormatException e)
+	    {
+	    	//JOptionPane.showMessageDialog(null,"Input must be a number.");
+	    	//getTimerSekundy=0;
+	    	System.out.println("sek");
+	    }*/
+		
+		
+		getTimerGodziny = Integer.parseInt(PomodoroCustomTimer.txtGodziny.getText());
+		getTimerMinuty = Integer.parseInt(PomodoroCustomTimer.txtMinuty.getText());
+		getTimerSekundy = Integer.parseInt(PomodoroCustomTimer.txtSekundy.getText());
+		
+		getTimerGodziny=sprawdzCzas(getTimerGodziny);
+		getTimerMinuty=sprawdzCzas(getTimerMinuty);
+		getTimerSekundy=sprawdzCzas(getTimerSekundy);
 		
 		pozostalyCzas = (getTimerGodziny*3600) + (getTimerMinuty*60) + getTimerSekundy;
 		//System.out.println("Pozostaly czas: "+pozostalyCzas + " sekund");
 		
 	}
 	
-	public static void ustawCzas()
+	private static int sprawdzCzas(int pobranyCzas)
+	{
+		if (pobranyCzas < 0)
+		{
+			pobranyCzas=0;
+		}
+		else if (pobranyCzas > 59)
+		{
+			pobranyCzas=59;
+		}
+		return pobranyCzas;
+	}
+	
+	
+	private static void ustawCzas()
 	{
 		int seconds = (int) (pozostalyCzas) % 60 ;
 		int minutes = (int) ((pozostalyCzas / 60) % 60);
@@ -67,26 +122,6 @@ public class Stopwatch
 		
 	}
 			
-/*	public static int getLicznikCzasu()
-	{
-		return pozostalyCzas;
-	}
-
-	public static void setLicznikCzasu(int licznikCzasu)
-	{
-		Stopwatch.pozostalyCzas = licznikCzasu;
-	}
-
-	public static String getSekundy()
-	{
-		return sekundy;
-	}
-
-	public static void setSekundy(String sekundy)
-	{
-		Stopwatch.sekundy = sekundy;
-	}*/
-
 	private static void licznikCzasu()
 	{
 		
@@ -106,7 +141,7 @@ public class Stopwatch
 	private static final int licznikCzasuOdliczanie()
 	{
 		
-		if (pozostalyCzas == 1)
+		if (pozostalyCzas <= 1)
 		{
 			timer.cancel();
 			

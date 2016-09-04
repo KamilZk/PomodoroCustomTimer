@@ -1,7 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +40,8 @@ public class PomodoroCustomTimer extends JFrame implements ActionListener
 	
 	private JButton btnStart, btnStop;
 	private JButton btnInfo;
+	
+	BufferedImage bntInfoGif;
 	
 	private JLabel lblGodziny, lblMin, lblSec, lblPomodoroCount, lblPomodoroIlosc;
 
@@ -151,6 +158,26 @@ public class PomodoroCustomTimer extends JFrame implements ActionListener
 		getContentPane().add(btnInfo);
 		btnInfo.addActionListener(this);
 		
+		//BTN LOG
+/*		try
+		{
+			bntInfoGif = ImageIO.read(new File("info.gif"));
+		} catch (IOException e)
+		{
+			
+			e.printStackTrace();
+		}
+		bntInfoGif = new JButton(new ImageIcon(bntInfoGif));
+		bntInfoGif.setBorderPainted(false);
+		bntInfoGif.setBorder(null);
+		bntInfoGif.setContentAreaFilled(false);
+		
+		//bntInfoGif = new JButton("Log");
+		bntInfoGif.setBounds(123, 160, 30, 35);
+		getContentPane().add(bntInfoGif);
+		bntInfoGif.addActionListener(this);*/
+		
+		
 		//-----------------------------------------
 		//LOOK And Feel -----------------------------
 		try
@@ -252,7 +279,7 @@ public class PomodoroCustomTimer extends JFrame implements ActionListener
 		
 		if(e.getSource()==btnInfo)
 		{
-			JOptionPane.showMessageDialog(null, "\u00a9 Kamil Zakrzewski, v0.8\nhttp://sites.google.com/site/kamilzprog/", "Info", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Pomodoro Custom Timer v0.8\n\u00a9 Kamil Zakrzewski\nhttp://sites.google.com/site/kamilzprog/", "Info", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
